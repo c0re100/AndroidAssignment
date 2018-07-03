@@ -4,66 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <EditText
         android:id="@+id/txtUsername"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
         android:layout_marginEnd="25dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="29dp"
         android:ems="10"
         android:hint="Username"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/txtDOB"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtDoB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txtDOB"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginStart="25dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:hint="Date Of Birth"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/txtPhoneNumber"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/txtDoB"
+        android:layout_width="124dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="482dp"
+        android:layout_marginStart="24dp"
+        android:text="Date Of Birth"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtUsername" />
+
+    <DatePicker
+        android:id="@+id/pickerDOB"
+        android:layout_width="0dp"
+        android:layout_height="157dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="140dp"
+        android:layout_weight="1"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:ems="10"
+        android:hint="Date Of Birth"
+        android:inputType="datetime|date|time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtPhoneNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
         android:layout_marginEnd="25dp"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="22dp"
         android:ems="10"
         android:hint="Phone Number"
         android:inputType="phone"
-        app:layout_constraintBottom_toTopOf="@+id/txtEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDOB" />
+        app:layout_constraintTop_toBottomOf="@+id/pickerDOB" />
 
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="17dp"
         android:layout_marginEnd="25dp"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="22dp"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/btnReset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPhoneNumber" />
@@ -72,25 +84,30 @@
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="22dp"
-        android:layout_marginStart="1dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginTop="22dp"
         android:onClick="Submit"
         android:text="Submit"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnReset"
         app:layout_constraintEnd_toStartOf="@+id/btnReset"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
     <Button
         android:id="@+id/btnReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="278dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginTop="22dp"
         android:onClick="Reset"
         android:text="Reset"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="@+id/txtEmail"
         app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+
+    <Button
+        android:id="@+id/btnGuest"
+        android:layout_width="216dp"
+        android:layout_height="wrap_content"
+        android:text="Play as Guest"
+        tools:layout_editor_absoluteX="103dp"
+        tools:layout_editor_absoluteY="514dp" />
 
 </android.support.constraint.ConstraintLayout>
