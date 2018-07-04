@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Register"
     tools:layout_editor_absoluteY="81dp">
 
     <EditText
@@ -18,6 +18,7 @@
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
+        android:maxLength="10"
         app:layout_constraintBottom_toTopOf="@+id/txtDoB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,12 +28,13 @@
         android:id="@+id/txtDoB"
         android:layout_width="124dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="482dp"
+        android:layout_marginBottom="394dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="92dp"
         android:text="Date Of Birth"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnGuest"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUsername" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <DatePicker
         android:id="@+id/pickerDOB"
@@ -62,6 +64,7 @@
         android:ems="10"
         android:hint="Phone Number"
         android:inputType="phone"
+        android:maxLength="8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickerDOB" />
@@ -76,18 +79,19 @@
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
+        android:maxLength="255"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPhoneNumber" />
 
     <Button
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="39dp"
         android:layout_marginTop="22dp"
-        android:onClick="Submit"
-        android:text="Submit"
+        android:onClick="Save"
+        android:text="Save"
         app:layout_constraintEnd_toStartOf="@+id/btnReset"
         app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
@@ -104,10 +108,15 @@
 
     <Button
         android:id="@+id/btnGuest"
-        android:layout_width="216dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:text="Play as Guest"
-        tools:layout_editor_absoluteX="103dp"
-        tools:layout_editor_absoluteY="514dp" />
+        android:layout_marginBottom="41dp"
+        android:onClick="Guest"
+        android:text="Play as A Guest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDoB" />
 
 </android.support.constraint.ConstraintLayout>
