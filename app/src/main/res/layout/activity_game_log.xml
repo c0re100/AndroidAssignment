@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameLog">
+
+    <ImageView
+        android:id="@+id/imgSelf"
+        android:layout_width="126dp"
+        android:layout_height="123dp"
+        app:srcCompat="@drawable/husky"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <ImageView
+        android:id="@+id/imgOppo"
+        android:layout_width="126dp"
+        android:layout_height="123dp"
+        app:srcCompat="@drawable/Unknown"
+        tools:layout_editor_absoluteX="269dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <TextView
+        android:id="@+id/oppoName"
+        android:layout_width="124dp"
+        android:layout_height="24dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="271dp"
+        tools:layout_editor_absoluteY="40dp" />
+
+    <TextView
+        android:id="@+id/selfName"
+        android:layout_width="124dp"
+        android:layout_height="24dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="40dp" />
+
+    <Button
+        android:id="@+id/btnRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:text="Button"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="530dp" />
+
+</android.support.constraint.ConstraintLayout>
