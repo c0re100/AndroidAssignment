@@ -13,6 +13,7 @@ public class MainPage extends AppCompatActivity {
     private Button btnStart, btnInfo, btnLog, btnCheat;
     private TextView txtUsername, txtDoB, txtPhoneNumber, txtEmail;
     private boolean cheatMode = false;
+    private SharedPreferences profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +37,11 @@ public class MainPage extends AppCompatActivity {
     }
 
     public void fetchInfo() {
-        SharedPreferences profile = getSharedPreferences("profile", MODE_PRIVATE);
-        txtUsername.setText("Username: " + profile.getString("username", "Unknown"));
-        txtDoB.setText("DoB: " + profile.getString("DoB", "Unknown"));
-        txtPhoneNumber.setText("Phone: " + profile.getString("phone_number", "Unknown"));
-        txtEmail.setText("E-mail: " + profile.getString("email", "Unknown"));
+        profile = getSharedPreferences("profile", MODE_PRIVATE);
+        txtUsername.setText("Username: " + profile.getString("username", "unknown"));
+        txtDoB.setText("DoB: " + profile.getString("DoB", "unknown"));
+        txtPhoneNumber.setText("Phone: " + profile.getString("phone_number", "unknown"));
+        txtEmail.setText("E-mail: " + profile.getString("email", "unknown"));
     }
 
     public void onBackPressed() {
@@ -49,12 +50,29 @@ public class MainPage extends AppCompatActivity {
 
     public void EditProfile(View view) {
         Intent intent = new Intent(this, Register.class);
-        intent.putExtra("EditMode", true);
+        intent.putExtra("editMode", true);
+        startActivity(intent);
+        finish();
+    }
+
+    public void gogogo(View view) {
+        Intent intent = new Intent(this, P2PGame.class);
+        intent.putExtra("username", profile.getString("username", "unknown"));
+        if (cheatMode) {
+            intent.putExtra("cheatMode", true);
+        }
         startActivity(intent);
     }
 
     public void cheatMode(View view) {
-        cheatMode = true;
-        Toast.makeText(this, "Yup, Cheat mode ON...anyway, but I hate(love) cheating :)", Toast.LENGTH_LONG).show();
+        if (!cheatMode) {
+            cheatMode = true;
+            Toast.makeText(this, "Yup, Cheat mode ON...anyway, but I hate(love) cheating :)", Toast.LENGTH_LONG).show();
+            btnCheat.setText("Drop the GUN :D");
+        } else {
+            cheatMode = false;
+            Toast.makeText(this, "Yup, Cheat mode OFF... :)", Toast.LENGTH_LONG).show();
+            btnCheat.setText("Give me the GUN!!!");
+        }
     }
 }

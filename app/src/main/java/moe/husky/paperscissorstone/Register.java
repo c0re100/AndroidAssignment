@@ -1,7 +1,10 @@
 package moe.husky.paperscissorstone;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,9 +24,14 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (!isNetworkAvailable()) {
+            startActivity(new Intent(this, NetworkStatus.class));
+            return;
+        }
+
         boolean isEditing;
         try {
-            isEditing = getIntent().getExtras().getBoolean("EditMode", false);
+            isEditing = getIntent().getExtras().getBoolean("editMode", false);
         } catch (Exception ex) {
             isEditing = false;
         }
@@ -52,10 +60,10 @@ public class Register extends AppCompatActivity {
         int month = Integer.parseInt(parts[1]);
         int day = Integer.parseInt(parts[2]);
 
-        username.setText(profile.getString("username", "Unknown"));
+        username.setText(profile.getString("username", "unknown"));
         pickDate.updateDate(year, month, day);
-        phoneNumber.setText(profile.getString("phone_number", "Unknown"));
-        email.setText(profile.getString("email", "Unknown"));
+        phoneNumber.setText(profile.getString("phone_number", "unknown"));
+        email.setText(profile.getString("email", "unknown"));
     }
 
     public void Save(View view) {
@@ -90,9 +98,9 @@ public class Register extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("profile", MODE_PRIVATE);
         pref.edit().putString("username", username.getText().toString()).putString("DoB", pickDate.getYear() + "-" + pickDate.getMonth() + "-" + pickDate.getDayOfMonth()).putString("phone_number", phoneNumber.getText().toString()).putString("email", email.getText().toString()).apply();
 
-        Toast.makeText(this, "Register Successful, redirect to game page after 3 seconds :)", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Register Successful :)", Toast.LENGTH_LONG).show();
 
-        setContentView(R.layout.activity_main_page);
+        startActivity(new Intent(this, MainPage.class));
     }
 
     public void Reset(View view) {
@@ -108,8 +116,15 @@ public class Register extends AppCompatActivity {
         SharedPreferences pref = getSharedPreferences("profile", MODE_PRIVATE);
         pref.edit().putString("username", "Guest").putString("DoB", pickDate.getYear() + "-" + pickDate.getMonth() + "-" + pickDate.getDayOfMonth()).putString("phone_number", "999").putString("email", "team@husky.moe").apply();
 
-        Toast.makeText(this, "Play as a Guest, redirect to game page after 3 seconds :)", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Play as a Guest :)", Toast.LENGTH_LONG).show();
 
-        setContentView(R.layout.activity_main_page);
+        startActivity(new Intent(this, MainPage.class));
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

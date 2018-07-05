@@ -48,7 +48,7 @@
             android:id="@+id/Username"
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:text=""
+            android:textSize="22sp"
             tools:layout_editor_absoluteX="231dp"
             tools:layout_editor_absoluteY="40dp" />
 
@@ -60,7 +60,7 @@
             android:id="@+id/DoB"
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:text=""
+            android:textSize="22sp"
             tools:layout_editor_absoluteX="231dp"
             tools:layout_editor_absoluteY="81dp" />
 
@@ -72,7 +72,7 @@
             android:id="@+id/PhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="34dp"
-            android:text=""
+            android:textSize="22sp"
             tools:layout_editor_absoluteX="231dp"
             tools:layout_editor_absoluteY="122dp" />
 
@@ -84,7 +84,7 @@
             android:id="@+id/Email"
             android:layout_width="match_parent"
             android:layout_height="33dp"
-            android:text=""
+            android:textSize="22sp"
             tools:layout_editor_absoluteX="231dp"
             tools:layout_editor_absoluteY="167dp" />
 
@@ -108,6 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:text="Start Game"
+            android:onClick="gogogo"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="367dp" />
 
@@ -144,8 +145,8 @@
             android:id="@+id/btnCheat"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:text="I am Winner"
             android:onClick="cheatMode"
+            android:text="Give me the GUN!!!"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="460dp" />
     </LinearLayout>
