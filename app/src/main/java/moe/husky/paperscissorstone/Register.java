@@ -61,7 +61,7 @@ public class Register extends AppCompatActivity {
         int day = Integer.parseInt(parts[2]);
 
         username.setText(profile.getString("username", "unknown"));
-        pickDate.updateDate(year, month, day);
+        pickDate.updateDate(year, month-1, day);
         phoneNumber.setText(profile.getString("phone_number", "unknown"));
         email.setText(profile.getString("email", "unknown"));
     }
@@ -96,7 +96,7 @@ public class Register extends AppCompatActivity {
         }
 
         SharedPreferences pref = getSharedPreferences("profile", MODE_PRIVATE);
-        pref.edit().putString("username", username.getText().toString()).putString("DoB", pickDate.getYear() + "-" + pickDate.getMonth() + "-" + pickDate.getDayOfMonth()).putString("phone_number", phoneNumber.getText().toString()).putString("email", email.getText().toString()).apply();
+        pref.edit().putString("username", username.getText().toString()).putString("DoB", pickDate.getYear() + "-" + (pickDate.getMonth()+1) + "-" + pickDate.getDayOfMonth()).putString("phone_number", phoneNumber.getText().toString()).putString("email", email.getText().toString()).apply();
 
         Toast.makeText(this, "Register Successful :)", Toast.LENGTH_LONG).show();
 
@@ -114,7 +114,7 @@ public class Register extends AppCompatActivity {
 
     public void Guest(View view) {
         SharedPreferences pref = getSharedPreferences("profile", MODE_PRIVATE);
-        pref.edit().putString("username", "Guest").putString("DoB", pickDate.getYear() + "-" + pickDate.getMonth() + "-" + pickDate.getDayOfMonth()).putString("phone_number", "999").putString("email", "team@husky.moe").apply();
+        pref.edit().putString("username", "Guest").putString("DoB", pickDate.getYear() + "-" + (pickDate.getMonth()+1) + "-" + pickDate.getDayOfMonth()).putString("phone_number", "999").putString("email", "a@b.c").apply();
 
         Toast.makeText(this, "Play as a Guest :)", Toast.LENGTH_LONG).show();
 
