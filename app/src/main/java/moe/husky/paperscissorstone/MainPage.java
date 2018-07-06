@@ -16,6 +16,7 @@ public class MainPage extends AppCompatActivity {
     private TextView txtUsername, txtDoB, txtPhoneNumber, txtEmail;
     private boolean cheatMode = false;
     private SharedPreferences profile;
+    private static int quitTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +60,16 @@ public class MainPage extends AppCompatActivity {
         Intent intent = new Intent(this, P2PGame.class);
         intent.putExtra("username", profile.getString("username", "unknown"));
         if (cheatMode) {
+            intent.putExtra("username", "Kenneth");
             intent.putExtra("cheatMode", true);
         }
-        startActivity(intent);
+        startActivityForResult(intent, 0);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (quitTime >= 3 && btnCheat.getVisibility() == View.GONE) {
+            btnCheat.setVisibility(View.VISIBLE);
+        }
     }
 
     public void EditProfile(View view) {
@@ -75,6 +83,10 @@ public class MainPage extends AppCompatActivity {
         startActivity(new Intent(this, GameLog.class));
     }
 
+    public void barChart(View view) {
+        startActivity(new Intent(this, BarChart.class));
+    }
+
     public void cheatMode(View view) {
         if (!cheatMode) {
             cheatMode = true;
@@ -85,5 +97,9 @@ public class MainPage extends AppCompatActivity {
             Toast.makeText(this, "Yup, Cheat mode OFF... :)", Toast.LENGTH_LONG).show();
             btnCheat.setText("Give me the GUN!!!");
         }
+    }
+
+    public static void addQuit() {
+        quitTime++;
     }
 }

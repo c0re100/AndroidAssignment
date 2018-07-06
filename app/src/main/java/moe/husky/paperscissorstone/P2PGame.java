@@ -150,12 +150,26 @@ public class P2PGame extends AppCompatActivity {
     }
 
     public void ShowOppoInfo(String name, int age, int hand) {
-        oppoName.setText(name);
-        oppoAge = age;
-        oppoHand = hand;
+        if (isCheating) {
+            imgSelf.setImageResource(R.drawable.kenneth);
+            imgOppo.setImageResource(R.drawable.husky);
+            oppoName.setText("Husky");
+            oppoAge = age;
+            oppoHand = hand;
+        } else {
+            oppoName.setText(name);
+            oppoAge = age;
+            oppoHand = hand;
+        }
+    }
+
+    public void onBackPressed() {
+        MainPage.addQuit();
+        finish();
     }
 
     public void quit(View view) {
+        MainPage.addQuit();
         finish();
     }
 
@@ -173,7 +187,6 @@ public class P2PGame extends AppCompatActivity {
                 imgOHand.setImageResource(R.drawable.stone);
                 break;
         }
-
 
         if (selfHand == oppoHand) {
             Status.setText("Draw!");
