@@ -27,6 +27,7 @@
         <activity android:name=".GameLog" />
         <activity android:name=".P2PGame" />
         <activity android:name=".NetworkStatus" />
+        <activity android:name=".BarChart"></activity>
     </application>
 
 </manifest>
