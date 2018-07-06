@@ -1,5 +1,6 @@
 package moe.husky.paperscissorstone;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.os.Message;
@@ -20,13 +21,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import static java.text.DateFormat.getDateTimeInstance;
 
 public class P2PGame extends AppCompatActivity {
+    SQLiteDatabase db;
     private ImageView imgSelf, imgOppo, imgSHand, imgOHand, imgPaper, imgScissors, imgStone;
     private Button btnContinue, btnQuit;
     private TextView selfName, oppoName, Status;
     private boolean isCheating, isEnd;
     private int oppoAge, oppoHand;
+    private long startTime;
+    private String currentTime;
 
     Handler tHandler = new Handler() {
         @Override
@@ -56,6 +65,12 @@ public class P2PGame extends AppCompatActivity {
         selfName = findViewById(R.id.selfName);
         oppoName = findViewById(R.id.oppoName);
         Status = findViewById(R.id.Status);
+
+        db = SQLiteDatabase.openDatabase(getApplicationContext().getFilesDir().getPath() + "/Record.db", null, SQLiteDatabase.CREATE_IF_NECESSARY);
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        currentTime = df.format(new Date());
+        startTime = System.currentTimeMillis();
 
         new Thread(new Runnable() {
             @Override
@@ -145,6 +160,8 @@ public class P2PGame extends AppCompatActivity {
     }
 
     public void checkResult(int selfHand, int oppoHand) {
+        double elapsedTime = (System.currentTimeMillis() - startTime) / 1000.0;
+
         switch (oppoHand) {
             case 0:
                 imgOHand.setImageResource(R.drawable.paper);
@@ -176,6 +193,12 @@ public class P2PGame extends AppCompatActivity {
             Status.setText("Win!");
         }
 
+        if (isCheating && selfHand < oppoHand || isCheating && selfHand == 2 && oppoHand == 0) {
+            db.execSQL("INSERT INTO GamesLog (gameNo, gamedate, gametime, playerName, opponentName, opponentAge, yourHand, opponentHand, status) VALUES (null, '" + currentTime + "', " + elapsedTime + ", '" + selfName.getText().toString() + "', '" + oppoName.getText().toString() + "', " + oppoAge + ", " + 0 + ", " + 2 + ", '" + Status.getText().toString() + "')");
+        } else {
+            db.execSQL("INSERT INTO GamesLog (gameNo, gamedate, gametime, playerName, opponentName, opponentAge, yourHand, opponentHand, status) VALUES (null, '" + currentTime + "', " + elapsedTime + ", '" + selfName.getText().toString() + "', '" + oppoName.getText().toString() + "', " + oppoAge + ", " + selfHand + ", " + oppoHand + ", '" + Status.getText().toString() + "')");
+        }
+
         btnContinue.setVisibility(View.VISIBLE);
         isEnd = true;
     }
@@ -186,6 +209,9 @@ public class P2PGame extends AppCompatActivity {
         imgSHand.setImageDrawable(null);
         imgOHand.setImageDrawable(null);
         btnContinue.setVisibility(View.INVISIBLE);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        currentTime = df.format(new Date());
+        startTime = System.currentTimeMillis();
 
         new Thread(new Runnable() {
             @Override

@@ -1,7 +1,9 @@
 package moe.husky.paperscissorstone;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,11 @@ public class MainPage extends AppCompatActivity {
         fetchInfo();
 
         Toast.makeText(this, "Welcome to the Paper Scissor Stone game :)", Toast.LENGTH_LONG).show();
+
+        //create DB if not exist
+        SQLiteDatabase db = SQLiteDatabase.openDatabase(getApplicationContext().getFilesDir().getPath() + "/Record.db",
+                null, SQLiteDatabase.CREATE_IF_NECESSARY);
+        db.execSQL("CREATE TABLE IF NOT EXISTS GamesLog (gameNo INTEGER primary key AUTOINCREMENT, gamedate TEXT, gametime INTEGER, playerName TEXT, opponentName TEXT, opponentAge INTEGER, yourHand INTEGER, opponentHand INTEGER, status TEXT)");
     }
 
     public void fetchInfo() {
@@ -48,13 +55,6 @@ public class MainPage extends AppCompatActivity {
         finish();
     }
 
-    public void EditProfile(View view) {
-        Intent intent = new Intent(this, Register.class);
-        intent.putExtra("editMode", true);
-        startActivity(intent);
-        finish();
-    }
-
     public void gogogo(View view) {
         Intent intent = new Intent(this, P2PGame.class);
         intent.putExtra("username", profile.getString("username", "unknown"));
@@ -62,6 +62,17 @@ public class MainPage extends AppCompatActivity {
             intent.putExtra("cheatMode", true);
         }
         startActivity(intent);
+    }
+
+    public void EditProfile(View view) {
+        Intent intent = new Intent(this, Register.class);
+        intent.putExtra("editMode", true);
+        startActivity(intent);
+        finish();
+    }
+
+    public void checkLog(View view) {
+        startActivity(new Intent(this, GameLog.class));
     }
 
     public void cheatMode(View view) {

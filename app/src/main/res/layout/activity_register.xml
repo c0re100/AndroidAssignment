@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".Register"
     tools:layout_editor_absoluteY="81dp">
 
@@ -32,6 +33,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="92dp"
         android:text="Date Of Birth"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/btnGuest"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,7 +65,7 @@
         android:layout_marginTop="22dp"
         android:ems="10"
         android:hint="Phone Number"
-        android:inputType="phone"
+        android:inputType="number"
         android:maxLength="8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
