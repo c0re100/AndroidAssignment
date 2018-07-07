@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle" >
-    <solid android:color="@android:color/transparent" />
-    <stroke
-        android:width="3dp"
-        android:color="#DB3E33" />
-    <corners android:radius="5dip" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="15dip" />
+            <stroke android:width="3dp" android:color="#DB3E33" />
+            <gradient android:angle="-90" android:endColor="#017DAB" android:startColor="#0099CC" />
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
+        </shape>
+    </item>
 
-    <padding
-        android:bottom="10dp"
-        android:left="10dp"
-        android:right="10dp"
-        android:top="10dp" />
-</shape>
+    <item android:color="@android:color/black">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <stroke android:width="3dp" android:color="#DB3E33" />
+            <corners android:radius="15dip" />
+            <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp" />
+        </shape>
+    </item>
+</selector>

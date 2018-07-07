@@ -30,10 +30,10 @@ public class BarChart extends AppCompatActivity {
     public void reset(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Are you sure?");
-        builder.setMessage("");
-        builder.setIcon(R.mipmap.ic_launcher_round);
+        builder.setMessage("Dangerous: this action will reset your statistics.");
+        builder.setIcon(R.drawable.icon);
         builder.setCancelable(true);
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SQLiteDatabase db = SQLiteDatabase.openDatabase(getApplicationContext().getFilesDir().getPath() + "/Record.db", null, SQLiteDatabase.CREATE_IF_NECESSARY);
@@ -50,7 +50,7 @@ public class BarChart extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
