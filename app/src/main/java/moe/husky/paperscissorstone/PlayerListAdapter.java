@@ -97,7 +97,7 @@ public class PlayerListAdapter extends ArrayAdapter<Player> {
         int defaultImage = mContext.getResources().getIdentifier("@drawable/image_failed", null, mContext.getPackageName());
 
         DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true)
-                .cacheOnDisc(true).resetViewBeforeLoading(true)
+                .cacheOnDisk(true).resetViewBeforeLoading(true)
                 .showImageForEmptyUri(defaultImage)
                 .showImageOnFail(defaultImage)
                 .showImageOnLoading(defaultImage).build();
@@ -111,7 +111,7 @@ public class PlayerListAdapter extends ArrayAdapter<Player> {
 
     private void setupImageLoader() {
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
-                .cacheOnDisc(true).cacheInMemory(true)
+                .cacheOnDisk(true).cacheInMemory(true)
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .displayer(new FadeInBitmapDisplayer(300)).build();
 
@@ -119,7 +119,7 @@ public class PlayerListAdapter extends ArrayAdapter<Player> {
                 mContext)
                 .defaultDisplayImageOptions(defaultOptions)
                 .memoryCache(new WeakMemoryCache())
-                .discCacheSize(100 * 1024 * 1024).build();
+                .diskCacheSize(100 * 1024 * 1024).build();
 
         ImageLoader.getInstance().init(config);
     }

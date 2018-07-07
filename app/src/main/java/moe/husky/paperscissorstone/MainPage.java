@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -56,7 +58,19 @@ public class MainPage extends AppCompatActivity {
         finish();
     }
 
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     public void gogogo(View view) {
+        if (!isNetworkAvailable()) {
+            startActivity(new Intent(this, NetworkStatus.class));
+            return;
+        }
+
         Intent intent = new Intent(this, P2PGame.class);
         intent.putExtra("username", profile.getString("username", "unknown"));
         if (cheatMode) {
@@ -66,7 +80,7 @@ public class MainPage extends AppCompatActivity {
         startActivityForResult(intent, 0);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (quitTime >= 3 && btnCheat.getVisibility() == View.GONE) {
             btnCheat.setVisibility(View.VISIBLE);
         }
