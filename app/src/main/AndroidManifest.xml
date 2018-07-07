@@ -9,27 +9,37 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".Register"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainPage" />
-        <activity android:name=".GameLog" />
-        <activity android:name=".P2PGame" />
+        <activity
+            android:name=".MainPage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GameLog"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".P2PGame"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NetworkStatus"
-            android:noHistory="true" />
-        <activity android:name=".BarChart" />
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BarChart"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -84,7 +84,7 @@ public class ChartFragment extends Fragment {
             if (total == 0)
                 c.drawText("Win rate: uncountable", 20, 900, paint);
             else
-                c.drawText("Win rate: " + Float.toString(((float) win / (float) total) * 100.00f) + "%", 20, 900, paint);
+                c.drawText("Win rate: " + Float.toString(((float) win / (float) total) * 100.000f) + "%", 20, 900, paint);
             paint.setColor(Color.BLUE);
             c.drawText("Total round: " + total, 20, 1000, paint);
         }

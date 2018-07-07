@@ -46,7 +46,7 @@ public class BarChart extends AppCompatActivity {
                 ft.replace(R.id.chartFragment, fragment);
                 ft.commit();
 
-                Toast.makeText(BarChart.this, "Ok, all record deleted.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BarChart.this, "Okay, all record deleted.", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });
