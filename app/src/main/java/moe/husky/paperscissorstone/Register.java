@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -90,8 +91,13 @@ public class Register extends AppCompatActivity {
             isSetMail = true;
         }
 
+        if (!isValidEmail(email.getText().toString())) {
+            Toast.makeText(this, "Register Failed, please type a valid email.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if (!isSetUname || !isSetPnum || !isSetMail) {
-            Toast.makeText(this, "Register Failed, please complete all required fields", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Register Failed, please complete all required fields.", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -101,6 +107,10 @@ public class Register extends AppCompatActivity {
         Toast.makeText(this, "Register Successful :)", Toast.LENGTH_LONG).show();
 
         startActivity(new Intent(this, MainPage.class));
+    }
+
+    private static boolean isValidEmail(String email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     public void Reset(View view) {

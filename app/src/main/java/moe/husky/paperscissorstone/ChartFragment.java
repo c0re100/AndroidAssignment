@@ -1,5 +1,6 @@
 package moe.husky.paperscissorstone;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +10,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +64,7 @@ public class ChartFragment extends Fragment {
                 float offset = 80;
                 float left = 190;
                 float top = 180 + offset * i;
-                float right = 190 + data[i] * total / 10;
+                float right = 190 + (510 * ((float) data[i] / (float) total));
                 float bottom = 160 + offset * i;
 
                 if (right > 700) right = 700;
@@ -81,28 +81,28 @@ public class ChartFragment extends Fragment {
             }
 
             paint.setColor(Color.RED);
-            c.drawText("Win rate: " + Double.toString((win * total) / 100.0) + "%", 20, 900, paint);
+            if (total == 0)
+                c.drawText("Win rate: uncountable", 20, 900, paint);
+            else
+                c.drawText("Win rate: " + Float.toString(((float) win / (float) total) * 100.00f) + "%", 20, 900, paint);
             paint.setColor(Color.BLUE);
             c.drawText("Total round: " + total, 20, 1000, paint);
         }
     }
 
     public int getWin() {
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM 'GamesLog' WHERE status='Win!'", null);
-        cursor.moveToFirst();
-        return cursor.getInt(0);
+        Cursor cursor = db.rawQuery("SELECT * FROM 'GamesLog' WHERE status='Win!'", null);
+        return cursor.getCount();
     }
 
     public int getLose() {
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM 'GamesLog' WHERE status='Lose!'", null);
-        cursor.moveToFirst();
-        return cursor.getInt(0);
+        Cursor cursor = db.rawQuery("SELECT * FROM 'GamesLog' WHERE status='Lose!'", null);
+        return cursor.getCount();
     }
 
     public int getDraw() {
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM 'GamesLog' WHERE status='Draw!'", null);
-        cursor.moveToFirst();
-        return cursor.getInt(0);
+        Cursor cursor = db.rawQuery("SELECT * FROM 'GamesLog' WHERE status='Draw!'", null);
+        return cursor.getCount();
     }
 
     @Override
